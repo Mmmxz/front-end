@@ -1,0 +1,1 @@
+![my-logo.png](https://www.nuxtjs.cn/nuxt-views-schema.svg "my-logo")
