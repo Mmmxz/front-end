@@ -110,6 +110,13 @@
          ]
       }
       ```
+   #### h(sel: string, data?: vnodeData, children?: vnode) 函数
+   * 参数：sel(string-标签) VnodeData children
+   * 返回：vnode()
+   #### patch(oldVnode: Element | Vnode, vnode: VNode) 函数
+   1. 执行 pre hook
+   2. 如果第一个参数不是 vnode ，创建一个空的 vnode，关联到这个 DOM 元素
+   3. 如果是相同的 vnode ，执行 patchVnode()
    #### diff 算法 优化时间复杂度至 O(n)
       * 只比较同一层级，不跨级比较
       * tag 不相同，则直接删掉重建，不再深度比较
@@ -118,7 +125,20 @@
       * patchVnode
       * addVnodes removeVnodes
       * updateChildren (key 的重要性)
-9. 模板编译
+   > 判断 sameVnode: key 和 sel 都相等，不同的 vnode 直接删掉重建。
+   #### patchVnode：vnode对比，入参 oldVnode vnode
+   1. 执行 prepatch hook
+   2. 设置 vnode.elem 即将 vnode 挂载到 oldVnode 的元素上
+   3. 定义变量保存旧 children 和新 children，以便下一步使用
+   4. 处理 node 节点（children和text一定有一个不为空）
+      1. vnode.text === undefined 时，说明 vnode.children 一般有值。分4种情况：新旧都有children，**更新操作**；新有旧没有，清空旧的text，为当前dom节点加入children；旧有新没有，移除旧节点的children；旧text有，直接清空旧的text。
+      2. vnode.text !== undefined 时，说明 vnode.children 无值。新旧节点的文本不相等，直接移除旧的 children，设置新的 text。
+   #### diff 算法总结
+   * patchVnode
+   * addVnodes removeVnodes
+   * updateChildren（key 的重要性）
+   > 参考资料：https://blog.csdn.net/qq_39045755/article/details/113512304
+9.  模板编译
     > 会通过**组件渲染和更新过程**来考察
    #### `template` 经过模板编译( `vue-template-compiler` )变成了什么
    ```javascript
@@ -169,7 +189,7 @@
    * `with` 语法
    * 模板到 `render` 函数，再到 `vNode` ，再到渲染和更新
    * vue 组件可以用 `render` 代替 `template`
-10. 组件渲染/更新过程
+11. 组件渲染/更新过程
     #### 回顾
     * 响应式：监听 data 属性 `getter setter` （包括数组）
     * 模板编译：模板到 `render` 函数 再到 `vNode`
