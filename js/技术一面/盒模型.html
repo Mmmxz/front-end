@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>盒模型</title>
+  <style>
+    #div1 {
+      width: 100px;
+      padding: 10px;
+      margin: 10px;
+      border: 1px solid #ccc;
+    }
+    #div2 {
+      width: 100px;
+      padding: 10px;
+      margin: 10px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+<body>
+  <div id="div1">this is div1</div>
+  <div id="div2">this is div2</div>
+  <script>
+    console.log(document.getElementById('div1').offsetWidth) // 122px
+    console.log(document.getElementById('div2').offsetWidth) // 100px
+  </script>
+</body>
+</html>

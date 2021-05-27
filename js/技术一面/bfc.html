@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>bfc</title>
+  <style>
+    .container {
+      background-color: #f1f1f1;
+    }
+    .left {
+      float: left;
+    }
+    .bfc {
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+  <h3>未加bfc</h3>
+  <div class="container">
+    <img class="left" src="https://imgsa.baidu.com/forum/w%3D580/sign=c17ec807ba1c8701d6b6b2ee177e9e6e/02988a58d109b3de738f928bc5bf6c81810a4c73.jpg" width="200" height="200">
+    <p>某段文字</p>
+  </div>
+  <hr style="clear: both;">
+  <h3>加了bfc</h3>
+  <div class="container bfc">
+    <img class="left" src="https://imgsa.baidu.com/forum/w%3D580/sign=c17ec807ba1c8701d6b6b2ee177e9e6e/02988a58d109b3de738f928bc5bf6c81810a4c73.jpg" width="200" height="200">
+    <p class="bfc">某段文字</p>
+  </div>
+</body>
+</html>

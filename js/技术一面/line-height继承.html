@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>line-height 继承问题</title>
+  <style>
+    body {
+      font-size: 20px;
+      /* p 此时继承50px */
+      /* line-height: 50px; */
+      /* p 此时继承的 24px 是 16px * 1.5 = 24px 计算得来的 */
+      /* line-height: 1.5; */
+      /* p 此时继承的 40px 是 body 的 20px * 200% = 40px 注意！ */
+      line-height: 200%;
+    }
+    p {
+      font-size: 16px;
+      background-color: #ccc;
+    }
+  </style>
+</head>
+<body>
+  <p>这是一行文字</p>
+</body>
+</html>

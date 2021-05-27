@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>圣杯布局</title>
+  <style>
+    body {
+      min-width: 550px;
+    }
+    #header {
+      text-align: center;
+      background-color: #f1f1f1;
+    }
+    #container .column {
+      float: left;
+    }
+    #container {
+      padding-left: 200px;
+      padding-right: 150px;
+    }
+    #center {
+      background-color: #ccc;
+      width: 100%;
+    }
+    #left {
+      background-color: yellow;
+      width: 200px;
+      margin-left: -100%; /* 让 left 浮动上来 此处的100% 相当于container的不包含padding的宽度 */
+      position: relative;
+      right: 200px; /* 让 left 向左移动自身宽度 */
+    }
+    #right {
+      background-color: red;
+      width: 150px;
+      margin-right: -150px; /* 可以视为当前元素已经不占任何宽度 所以自然会浮动上来 */
+    }
+    #footer {
+      /* clear: both; */
+      text-align: center;
+      background-color: #f1f1f1;
+    }
+    /* 手写 clearfix */
+    .clearfix::after {
+      content: '';
+      display: table;
+      clear: both;
+    }
+    .clearfix {
+      *zoom: 1; /* 兼容 IE 低版本 */
+    }
+  </style>
+</head>
+<body>
+  <div id="header">this is header</div>
+  <div id="container" class="clearfix">
+    <div id="center" class="column">this is center</div>
+    <div id="left" class="column">this is left</div>
+    <div id="right" class="column">this is right</div>
+  </div>
+  <div id="footer">this is footer</div>
+</body>
+</html>
