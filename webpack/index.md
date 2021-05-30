@@ -32,3 +32,35 @@
 
 ### clean-webpack-plugin
 * 在打包前清理 dist 目录
+
+## source-map
+* 定义：当打包生成的代码出错时，将错误代码映射到源文件的位置，而不是打包后的文件，即用来生成源代码和目标代码直接的映射
+* 配置：在webpack.config.js中配置 devtool: 'source-map' 即可开启，配置 devtool: 'none' 来关闭
+* 用法：在 development 中，建议使用 cheap-module-eval-source-map ; 在 production 中，建议使用 cheap-module-source-map
+* source-map, 生成.map的映射文件
+* inline, 映射信息被合并到目标文件中，不单独生成文件
+* cheap, 只提示哪一行出错，不提示哪一列出错，并且只会生成业务代码的映射，不会对loader进行映射
+* module, 会loader进行映射，如babel的source-map
+* eval, 使用eval包裹模块代码，可以加快打包速度
+
+## devServer
+* webpack-dev-server
+* proxy 跨域代理配置
+* 配合 webpack-dev-middleware 实现简易的 devServer 代码见 server.js
+* hmr 热更新 vue-loader、babel-presets 已经内置了 hmr 的实现
+
+## babel
+* babel-polyfill 用来实现低版本浏览器不存在的 api ，如 promise map
+* useBuiltIns 用来配置 babel-polyfill 的按需引入
+* 注意：preset-env 和 polyfill 的方式会污染全局变量，如果需要编写第三方插件或者类库，可使用 plugin-transform-runtime 来避免污染全局
+* preset-react 将 jsx 语法编译为 babel 能识别的 js 语法
+
+## Tree Shaking
+* 在 webpack 编译阶段 tree shaking 会将未被使用的代码删除
+* 只支持 ES Mudule 的引入方式，不支持 CommonJS 的引入方式
+* 因为 ESM 是静态加载，也叫编译时加载； CJS 是动态加载，运行时加载模块
+* 注意，当不需要对 babel-polyfill 做 tree shaking 时，需要在 package.json 中配置 "sideEffects": ["@babel/poly-fill", "*.css"] 对css也不需要 tree shaking
+
+## development 和 production 的区分打包
+* 共同配置放在 webpack.common.js 中，各自的配置分别放在 dev 和 prod 中
+* 使用 webpack-merge 来合并配置

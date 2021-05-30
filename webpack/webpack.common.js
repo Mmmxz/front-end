@@ -3,7 +3,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 module.exports = {
-  entry: './index.js',
   entry: {
     main: './src/index.js',
     sub: './src/index.js'
@@ -36,6 +35,23 @@ module.exports = {
         use: {
           loader: 'vue-loader'
         }
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_mudules/,
+        loader: 'babel-loader'
+        // 有了 .babelrc 后，就不需要写 options 了
+        // options: {
+        //   // presets: [['@babel/preset-env', {
+        //   //   useBuiltIns: 'usage'
+        //   // }]]
+        //   'plugins': [['@babel/plugin-transform-runtime', {
+        //     'corejs': 2,
+        //     'helpers': true,
+        //     'regenerator': true,
+        //     'useESModules': false
+        //   }]]
+        // }
       }
     ]
   },
