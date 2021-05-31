@@ -64,3 +64,14 @@
 ## development 和 production 的区分打包
 * 共同配置放在 webpack.common.js 中，各自的配置分别放在 dev 和 prod 中
 * 使用 webpack-merge 来合并配置
+
+## code splitting
+* 代码分割和 webpack 无关
+* webpack 中实现代码分割：
+  1. 同步代码：只需要在 webpack.common.js 中做 optimization 的配置即可
+  2. 异步代码(import)：异步代码，无需做任何配置，会自动进行代码分割
+
+<!-- todo 4-5 -->
+
+## 环境变量
+* 全局变量 配置在 package.json 的 scripts 中 --env.production

@@ -1,8 +1,11 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const merge = require('webpack-merge')
+const devConfig = require('./webpack.dev')
+const prodConfig = require('./webpack.prod')
 
-module.exports = {
+const commonConfig = {
   entry: {
     main: './src/index.js',
     sub: './src/index.js'
@@ -11,6 +14,11 @@ module.exports = {
     publicPath: 'http://www.cdn.com',
     filename: '[name].js',
     path: path.resolve(__dirname, 'dist')
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all'
+    }
   },
   module: {
     rules: [
@@ -61,4 +69,12 @@ module.exports = {
     }),
     new CleanWebpackPlugin(['dist'])
   ]
+}
+
+module.exports = (env) => {
+  if (env && env.production) {
+    module.exports = merge(commonConfig, prodConfig)
+  } else {
+    module.exports = merge(commonConfig, devConfig)
+  }
 }

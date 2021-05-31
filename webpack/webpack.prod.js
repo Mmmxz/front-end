@@ -6,4 +6,5 @@ const prodConfig = {
   devtool: 'cheap-module-source-map'
 }
 
-module.exports = merge(commonConfig, prodConfig)
+// module.exports = merge(commonConfig, prodConfig)
+module.exports = prodConfig
